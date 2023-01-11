@@ -1,12 +1,13 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 
-export default function MyModal() {
-  let [isOpen, setIsOpen] = useState(true);
+type ModalProps = {
+  forceOpen: boolean;
+  onClose: () => void;
+};
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+export const Modal: FC<ModalProps> = ({ children, forceOpen = false, onClose = () => {} }) => {
+  let [isOpen, setIsOpen] = useState(forceOpen);
 
   function openModal() {
     setIsOpen(true);
@@ -14,17 +15,12 @@ export default function MyModal() {
 
   return (
     <>
-      <div className='fixed inset-0 flex items-center justify-center'>
-        <button
-          type='button'
-          onClick={openModal}
-          className='rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
-          Open dialog
-        </button>
-      </div>
+      <button type='button' onClick={openModal} aria-label='open modal'>
+        Open dialog
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+        <Dialog as='div' className='relative z-10' onClose={onClose}>
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -46,11 +42,7 @@ export default function MyModal() {
                 leave='ease-in duration-200'
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'>
-                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
-                  <Dialog.Title as='h3' className='text-lg font-medium leading-6 text-gray-900'>
-                    Payment successful
-                  </Dialog.Title>
-                </Dialog.Panel>
+                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all'>{children}</Dialog.Panel>
               </Transition.Child>
             </div>
           </div>
@@ -58,4 +50,4 @@ export default function MyModal() {
       </Transition>
     </>
   );
-}
+};

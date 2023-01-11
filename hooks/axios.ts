@@ -3,7 +3,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://pokeapi.co/api/v2';
 
-const useAxios = ({ url, method, config }) => {
+const useAxios = ({ url, method = 'get', config }) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);

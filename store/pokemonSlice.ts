@@ -1,12 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { PokemonSummary, PokemonDetails } from '../types';
+
+function ucFirst(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 export interface PokemonState {
-  all: Array<{ id: number; name: string; url: string }>;
+  all: Array<PokemonSummary>;
+  seen: {
+    [id: string]: PokemonDetails;
+  };
 }
 
 const initialState: PokemonState = {
-  all: []
+  all: [],
+  seen: {},
 };
 
 export const pokemonSlice = createSlice({
@@ -14,22 +23,28 @@ export const pokemonSlice = createSlice({
   initialState,
   reducers: {
     set: (state, action: PayloadAction<Array<{ name: string; url: string }>>) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      //   // doesn't actually mutate the state because it uses the Immer library,
-      //   // which detects changes to a "draft state" and produces a brand new
-      //   // immutable state based off those changes
       const transformed = action.payload.map(({ url, name }) => ({
-        name,
+        name: ucFirst(name),
         url,
-        id: Number(url.replace('https://pokeapi.co/api/v2/pokemon/', '').replace('/', ''))
+        id: Number(url.replace('https://pokeapi.co/api/v2/pokemon/', '').replace('/', '')),
       }));
 
       state.all = transformed;
+    },
+    setSeen: (state, action: PayloadAction<PokemonDetails>) => {
+      const details = action.payload;
+
+      const transformed = {
+        ...details,
+        name: ucFirst(details.name),
+      };
+
+      state.seen[details.id] = transformed;
     },
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { set } = pokemonSlice.actions;
+export const { set, setSeen } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
