@@ -4,7 +4,7 @@ import { setSeen } from '../store/pokemonSlice';
 import useAxios from '../hooks/axios';
 import { useRouter } from 'next/router';
 import { Tab } from '@headlessui/react';
-import { PokemonDetails } from '../store/types';
+import { PokemonDetails } from '../types';
 import { RootState } from '../store/store';
 import Head from 'next/head';
 import Link from 'next/link';

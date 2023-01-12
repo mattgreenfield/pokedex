@@ -1,13 +1,13 @@
 import { Dialog, Transition } from '@headlessui/react';
-import React, { FC, Fragment, ReactChild, useState } from 'react';
+import React, { FC, Fragment, ReactNode, useState } from 'react';
 
 type ModalProps = {
   forceOpen: boolean;
   onClose: () => void;
-  footer: () => ReactChild;
+  footer: () => ReactNode;
 };
 
-export const Modal: FC<ModalProps> = ({ children, forceOpen = false, onClose = () => {}, footer = () => {} }) => {
+export const Modal: FC<ModalProps> = ({ children, forceOpen = false, onClose = () => {}, footer }) => {
   let [isOpen, setIsOpen] = useState(forceOpen);
 
   function openModal() {
@@ -48,7 +48,7 @@ export const Modal: FC<ModalProps> = ({ children, forceOpen = false, onClose = (
                 <Dialog.Panel className="w-full max-w-md transform rounded-t-3xl overflow-hidden text-left align-middle shadow-xl transition-all">
                   <div className="rounded-3xl bg-white">{children}</div>
                   <nav className="relative bg-gray-50 rounded-3xl flex border-t divide-x overflow-hidden">
-                    {footer()}
+                    {typeof footer === 'function' && footer()}
                   </nav>
                 </Dialog.Panel>
               </Transition.Child>
