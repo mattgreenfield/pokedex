@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <Head>
         <title>Pokédex Home</title>
-        <meta name='description' content='A list of Pokémon' />
+        <meta name="description" content="A list of Pokémon" />
         {/* <link rel='icon' href='/favicon.ico' /> */}
       </Head>
     </>

@@ -9,21 +9,22 @@ export const Card: FC<CardProps> = ({ children, color = null }) => {
   return (
     <div
       className={classNames(
-        'rounded-2xl border border-gray-200 p-4 aspect-square transition-all flex justify-between flex-col shadow-sm',
-        'hover:scale-105 hover:shadow-md hover:bg-opacity-10',
+        'rounded-2xl border border-gray-200 aspect-square transition-all flex justify-between flex-col shadow-sm overflow-hidden',
+        'hover:scale-105 hover:shadow-md hover:bg-opacity-90',
         {
           'bg-gray-50': !color,
-          'bg-red-50': color === 'red',
-          'bg-green-50': color === 'green',
-          'bg-purple-100': color === 'purple',
-          'bg-slate-100': color === 'gray',
-          'bg-yellow-100': color === 'yellow',
-          'bg-brown-100': color === 'brown',
+          'bg-red-500': color === 'red',
+          'bg-green-500': color === 'green',
+          'bg-blue-500': color === 'blue',
+          'bg-purple-500': color === 'purple',
+          'bg-slate-500': color === 'gray',
+          'bg-yellow-500': color === 'yellow',
+          'bg-stone-500': color === 'brown',
           'bg-gray-400': color === 'black',
-          'bg-lightblue-100': color === 'lightBlue',
-          'bg-blue-100': color === 'blue'
+          'bg-sky-500': color === 'lightBlue',
         }
-      )}>
+      )}
+    >
       {children}
     </div>
   );

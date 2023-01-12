@@ -11,10 +11,10 @@ const useAxios = ({ url, method = 'get', config }) => {
   const fetchData = () => {
     axios
       .get(url, config)
-      .then(res => {
+      .then((res) => {
         setResponse(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err);
       })
       .finally(() => {

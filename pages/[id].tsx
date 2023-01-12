@@ -10,7 +10,7 @@ const Details = () => {
     <>
       <Head>
         <title>Pokédex</title>
-        <meta name='description' content='A summary of a given Pokemon' />
+        <meta name="description" content="A summary of a given Pokemon" />
       </Head>
       {id && <DetailsModal id={id} />}
     </>

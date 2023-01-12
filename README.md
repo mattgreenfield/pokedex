@@ -1,6 +1,5 @@
 # Pokedex
 
-
 ## Ideas...
 
 - animation on the image filter so the unfiltered image flickers in to sight

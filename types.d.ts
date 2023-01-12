@@ -3,6 +3,3 @@ export type PokemonSummary = {
   name: string;
   url: string;
 };
-export type PokemonSummary = {
-  id: number;
-};

@@ -24,6 +24,14 @@ interface Type {
   };
 }
 
+interface Move {
+  move: {
+    name: string;
+    url: string;
+  };
+  version_group_details: unknown[];
+}
+
 export interface PokemonDetails {
   abilities: Ability[];
   base_experience: number;
@@ -34,7 +42,7 @@ export interface PokemonDetails {
   id: number;
   is_default: boolean;
   location_area_encounters: string;
-  moves: unknown[]; // TODO
+  moves: Move[];
   name: string;
   order: number;
   past_types: unknown[]; // TODO
@@ -46,7 +54,7 @@ export interface PokemonDetails {
       home: { front_default: string };
       'official-artwork': { front_default: string };
     };
-  }; // TODO
+  };
   stats: Stat[];
   types: Type[];
   weight: number;

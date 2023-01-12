@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { PokemonSummary, PokemonDetails } from '../types';
-
-function ucFirst(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+import { ucFirst } from '../helpers/string';
 
 export interface PokemonState {
   all: Array<PokemonSummary>;
@@ -41,7 +38,7 @@ export const pokemonSlice = createSlice({
 
       state.seen[details.id] = transformed;
     },
-  }
+  },
 });
 
 // Action creators are generated for each case reducer function
