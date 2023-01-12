@@ -79,7 +79,7 @@ export const DetailsModal: FC<DetailsModalProps> = ({ id }) => {
                     })} 
                     height="200px" 
                     key={id + '_image'} 
-                    src={pokemonDetails ? pokemonDetails.sprites.other.['dream_world']['front_default'] : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
+                    src={pokemonDetails ? pokemonDetails.sprites.other.dream_world.front_default : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
                     alt={pokemonDetails && pokemonDetails.name}
                 />
             </div>

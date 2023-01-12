@@ -12,7 +12,7 @@ const Details = () => {
         <title>Pokédex</title>
         <meta name="description" content="A summary of a given Pokemon" />
       </Head>
-      {id && <DetailsModal id={id} />}
+      {id && <DetailsModal id={ typeof id === 'string' && id } />}
     </>
   );
 };
