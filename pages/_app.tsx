@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
-
   const [search, setSearch] = useState('');
 
   return (
@@ -21,7 +20,7 @@ function MyApp({ Component, pageProps }) {
             <div className="w-48">
               <input
                 type="text"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Search…"
                 onChange={(event) => setSearch(event.target.value)}
               />

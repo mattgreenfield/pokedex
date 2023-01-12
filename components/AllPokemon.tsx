@@ -41,7 +41,7 @@ export const AllPokemon: FC<AllPokemonProps> = ({ search }) => {
   const filteredList = allPokemon.filter(({ name }) => name.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
 
   const listClasses = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-3';
-  
+
   const getCardColor = (id) => {
     if (!seenPokemon[id]) {
       return null;
@@ -52,8 +52,8 @@ export const AllPokemon: FC<AllPokemonProps> = ({ search }) => {
 
   return loading ? (
     <ol className={listClasses}>
-      {[...Array(80)].map(() => (
-        <li>
+      {[...Array(80).keys()].map((index) => (
+        <li key={index + 'skeleton'}>
           <Card />
         </li>
       ))}
@@ -69,7 +69,7 @@ export const AllPokemon: FC<AllPokemonProps> = ({ search }) => {
         <>
           <ol className={listClasses}>
             {filteredList.map((item) => (
-              <li key={item.id}>
+              <li key={item.id + 'button'}>
                 <Link href={`/${item.id}`} scroll={false} passHref>
                   <a>
                     <Card color={getCardColor(item.id)}>
@@ -94,7 +94,9 @@ export const AllPokemon: FC<AllPokemonProps> = ({ search }) => {
               </li>
             ))}
           </ol>
-          {!filteredList.length && <div className='text-center font-medium mt-8 mb-10'>No items found, please try another search</div>}
+          {!filteredList.length && (
+            <div className="text-center font-medium mt-8 mb-10">No items found, please try another search</div>
+          )}
         </>
       ) : (
         'No Pokemon Found'

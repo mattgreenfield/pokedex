@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 
 type CardProps = {
-  color?: 'red' | 'green' | 'purple' | 'gray' | 'yellow' | 'brown' | 'black' | 'lightBlue' | 'blue';
+  color?: 'red' | 'green' | 'purple' | 'gray' | 'yellow' | 'brown' | 'black' | 'lightBlue' | 'blue' | 'lime';
 };
 
 export const Card: FC<CardProps> = ({ children, color = null }) => {
@@ -15,6 +15,7 @@ export const Card: FC<CardProps> = ({ children, color = null }) => {
           'bg-gray-50': !color,
           'bg-red-500': color === 'red',
           'bg-green-500': color === 'green',
+          'bg-lime-500': color === 'lime',
           'bg-blue-500': color === 'blue',
           'bg-purple-500': color === 'purple',
           'bg-slate-500': color === 'gray',

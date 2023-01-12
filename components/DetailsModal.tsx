@@ -42,14 +42,14 @@ export const DetailsModal: FC<DetailsModalProps> = ({ id }) => {
         {
             'title': 'Type',
             'markup':  <ul className='flex gap-2'>{pokemonDetails.types.map((t) => (
-                        <li key={t.slot}><Badge>{t.type.name}</Badge></li>
+                        <li key={t.slot + t.type.name + '_type'}><Badge>{t.type.name}</Badge></li>
                         ))}</ul>,
         },
         { 'title': 'Species', markup: pokemonDetails.species.name },        
         { 'title': 'Height', markup: <>{pokemonDetails.height}cm</> },            
         { 'title': 'Weight', markup: <>{pokemonDetails.weight}kg</> },
         { 'title': 'Abilities', markup:
-            <ul className='flex gap-2'>{pokemonDetails.abilities.map(({ability}) => <li><Badge>{ability.name}</Badge></li>)}</ul>
+            <ul className='flex gap-2 flex-wrap'>{pokemonDetails.abilities.map(({ability}) => <li><Badge>{ability.name}</Badge></li>)}</ul>
         },             
     ];
   }
@@ -78,7 +78,7 @@ export const DetailsModal: FC<DetailsModalProps> = ({ id }) => {
                         'blur-md scale-125': loading,
                     })} 
                     height="200px" 
-                    key={id} 
+                    key={id + '_image'} 
                     src={pokemonDetails ? pokemonDetails.sprites.other.['dream_world']['front_default'] : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
                     alt={pokemonDetails && pokemonDetails.name}
                 />
@@ -114,7 +114,7 @@ export const DetailsModal: FC<DetailsModalProps> = ({ id }) => {
                         <h3 className='sr-only'>General</h3>
                         <dl>
                             { getGeneralInfoMarkup(pokemonDetails).map(({title, markup}) => (
-                            <div className='flex gap-4 mb-1'>          
+                            <div className='flex gap-4 mb-1' key={title}>
                                 <dd className='text-gray-500 min-w-[70px]'>{title}:</dd>
                                 <dt className='font-medium'>{ markup }</dt>
                             </div>    
@@ -144,13 +144,15 @@ export const DetailsModal: FC<DetailsModalProps> = ({ id }) => {
                 {pokemonDetails && (
                     <>
                         <h3 className='sr-only'>Stats</h3>
-                        <ul>{pokemonDetails.stats.map(({base_stat, effort, stat}) => (<li>
-                            <div className='font-medium'>{ ucFirst(stat.name) }</div>
-                            <div className='h-4 rounded bg-gray-100'>
-                                <div style={{width: `${base_stat}%`}} className='bg-gray-600 h-4 max-w-full rounded text-white text-sm leading-[1.15] text-right px-1'>{base_stat}</div>
-                            </div>
-                            <div className='text-right text-gray-700 text-sm mt-1'>Effort: {effort}</div>
-                        </li>))}</ul>        
+                        <ul>{pokemonDetails.stats.map(({base_stat, effort, stat}) => (
+                            <li key={stat.name + base_stat + '_stat'}>
+                                <div className='font-medium'>{ ucFirst(stat.name) }</div>
+                                <div className='h-4 rounded bg-gray-100'>
+                                    <div style={{width: `${base_stat}%`}} className='bg-gray-600 h-4 max-w-full rounded text-white text-sm leading-[1.15] text-right px-1'>{base_stat}</div>
+                                </div>
+                                <div className='text-right text-gray-700 text-sm mt-1'>Effort: {effort}</div>
+                            </li>
+                        ))}</ul>        
                     </>
                 )}
                 </Tab.Panel>
